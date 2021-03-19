@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{Component} from 'react'
+import {createStore} from 'redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component{
+   render() {
+
+    //A reducer function must have two parameters
+    //State , Action
+
+    const reducer = (state={},action) => {
+      if(action.type == 'a'){
+        return{
+          ...state,
+          A: 'i am a'
+        }
+      }
+      if(action.type == 'b')
+      {
+        return{
+          ...state,
+          B : 'i am b'
+        }
+      }
+        return state
+    }
+
+    const store = createStore(reducer)
+
+    store.subscribe(()=>{
+      console.log(store.getState())
+    })
+
+    store.dispatch({type: 'b'})
+    store.dispatch({type: 'something'})
+    store.dispatch({type: 'a'})
+    store.dispatch({type: 'something'})
+
+    return (
+      <div className="App">
+       
+      </div>
+    );
+   }
 }
 
 export default App;
