@@ -1,47 +1,25 @@
-import React,{Component} from 'react'
-import {createStore} from 'redux'
+import React, { Component } from 'react'
+import store from './store/index'
+import { Provider } from 'react-redux'
+
+import Count from './components/Count'
+import Control from './components/Control'
+
+class App extends Component {
+  render() {
 
 
-class App extends Component{
-   render() {
-
-    //A reducer function must have two parameters
-    //State , Action
-
-    const reducer = (state={},action) => {
-      if(action.type == 'a'){
-        return{
-          ...state,
-          A: 'i am a'
-        }
-      }
-      if(action.type == 'b')
-      {
-        return{
-          ...state,
-          B : 'i am b'
-        }
-      }
-        return state
-    }
-
-    const store = createStore(reducer)
-
-    store.subscribe(()=>{
-      console.log(store.getState())
-    })
-
-    store.dispatch({type: 'b'})
-    store.dispatch({type: 'something'})
-    store.dispatch({type: 'a'})
-    store.dispatch({type: 'something'})
 
     return (
-      <div className="App">
-       
-      </div>
+      <Provider store={store} >
+        <div className="App">
+          <h1>Redux JS</h1>
+          <Count />
+          <Control />
+        </div>
+      </Provider>
     );
-   }
+  }
 }
 
-export default App;
+export default App
